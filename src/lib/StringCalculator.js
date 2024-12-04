@@ -1,6 +1,7 @@
 export class StringCalculator {
     constructor() {
         this.callCount = 0;
+        this.listeners = [];
     }
 
     add(numbers) {
@@ -36,7 +37,19 @@ export class StringCalculator {
             throw new Error(`Negatives not allowed: ${negatives.join(', ')}`);
         }
 
-        return parts.filter(num => num <= 1000).reduce((sum, num) => sum + num, 0);
+        const sum = parts.filter(num => num <= 1000).reduce((sum, num) => sum + num, 0);
+        this.triggerAddOccurred(numbers, sum);
+        return sum;
+    }
+
+    onAddOccurred(callback) {
+        this.listeners.push(callback);
+    }
+
+    triggerAddOccurred(input, result) {
+        for (const listener of this.listeners) {
+            listener(input, result);
+        }
     }
 
     getCalledCount() {
