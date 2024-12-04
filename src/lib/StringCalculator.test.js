@@ -44,9 +44,18 @@ describe('StringCalculator', () => {
   test('supports custom delimiters of any length', () => {
     expect(calculator.add("//[***]\n1***2***3")).toBe(6);
   });
-  
+
   test('supports multiple custom delimiters', () => {
     expect(calculator.add("//[*][%]\n1*2%3")).toBe(6);
+  });
+  
+  test('triggers AddOccurred event after calling add', () => {
+    const mockCallback = jest.fn(); // Mock function to listen to the event
+    calculator.onAddOccurred(mockCallback); // Register the callback
+  
+    calculator.add("1,2"); // Invoke add()
+  
+    expect(mockCallback).toHaveBeenCalledWith("1,2", 3); // Verify callback is triggered with input and result
   });
   
 });
