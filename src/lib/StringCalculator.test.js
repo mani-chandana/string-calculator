@@ -31,4 +31,10 @@ describe('StringCalculator', () => {
     expect(() => calculator.add("1,-2,3,-4")).toThrow("Negatives not allowed: -2, -4");
   });
   
+  test('tracks how many times add has been called', () => {
+    calculator.add("1,2");
+    calculator.add("3,4");
+    expect(calculator.getCalledCount()).toBe(2);
+  });
+  
 });
