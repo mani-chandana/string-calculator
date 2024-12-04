@@ -22,7 +22,7 @@ describe('StringCalculator', () => {
   test('handles new lines between numbers', () => {
     expect(calculator.add("1\n2,3")).toBe(6);
   });
-  
+
   test('supports custom delimiters', () => {
     expect(calculator.add("//;\n1;2")).toBe(3);
   });
@@ -39,6 +39,10 @@ describe('StringCalculator', () => {
   
   test('ignores numbers greater than 1000', () => {
     expect(calculator.add("2,1001,3")).toBe(5);
+  });
+  
+  test('supports custom delimiters of any length', () => {
+    expect(calculator.add("//[***]\n1***2***3")).toBe(6);
   });
   
 });
