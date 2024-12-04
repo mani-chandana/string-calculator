@@ -20,7 +20,7 @@ export class StringCalculator {
             throw new Error(`Negatives not allowed: ${negatives.join(', ')}`);
         }
 
-        return parts.reduce((sum, num) => sum + num, 0);
+        return parts.filter(num => num <= 1000).reduce((sum, num) => sum + num, 0);
     }
 
     getCalledCount() {
